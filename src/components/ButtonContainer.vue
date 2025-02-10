@@ -6,9 +6,9 @@
 
 <template>
     <div class="container">
-        <PlayButton/>
-        <PauseButton/>
-        <StopButton/>
+        <PlayButton @play="play"/>
+        <PauseButton @pause="pause"/>
+        <StopButton @stop="stop"/>
     </div>
 </template>
 
@@ -26,7 +26,23 @@
     height: 100%;
 
     padding: 1%;
-
-    border: solid 2px purple;
 }
 </style>
+
+<script>
+export default {
+    methods: {
+        play() {
+            this.$emit("play");
+        }, // end play
+
+        pause() {
+            this.$emit("pause");
+        }, // end pause
+
+        stop() {
+            this.$emit("stop");
+        }, // end stop
+    } // end methods
+} // end export
+</script>

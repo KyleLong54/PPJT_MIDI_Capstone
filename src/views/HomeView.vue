@@ -2,6 +2,7 @@
 import { RouterLink, RouterView } from 'vue-router'
 import Banner from '../components/Banner.vue'
 import UploadContent from '../components/UploadContent.vue';
+import UploadError from '@/components/UploadError.vue';
 </script>
 
 <template>
@@ -9,7 +10,8 @@ import UploadContent from '../components/UploadContent.vue';
     <Banner/>
   </header>
   <main>
-    <UploadContent/>
+    <UploadContent @show-error-message="showErrorMessage"/>
+    <UploadError id="upload_error" style="visibility: hidden;"/>
   </main>
 </template>
 
@@ -24,3 +26,17 @@ main {
   line-height: 5;
 }
 </style>
+
+<script>
+export default {
+  methods: {
+    test() {
+      alert("test");
+    }, // end test
+
+    showErrorMessage() {
+      document.getElementById('upload_error').style.visibility = 'visible';
+    }
+  } // end methods
+} // end export default
+</script>

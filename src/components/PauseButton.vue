@@ -1,5 +1,5 @@
 <template>
-    <button>PAUSE</button>
+    <button v-on:click="pause">PAUSE</button>
 </template>
 
 <style scoped>
@@ -8,3 +8,13 @@
         min-height: 25px;
     }
 </style>
+
+<script>
+export default {
+    methods: {
+        pause() {
+            this.$emit("pause");
+        } // end pause
+    } // end methods
+} // end export
+</script>
