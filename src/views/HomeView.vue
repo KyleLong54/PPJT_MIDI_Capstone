@@ -30,10 +30,6 @@ main {
 <script>
 export default {
   methods: {
-    test() {
-      alert("test");
-    }, // end test
-
     showErrorMessage() {
       document.getElementById('upload_error').style.visibility = 'visible';
     }

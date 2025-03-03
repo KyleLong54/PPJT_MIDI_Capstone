@@ -1,3 +1,13 @@
+<script setup>
+// =================== Setup Emits ===================
+const emit = defineEmits(['stop']);
+
+// =================== Functions ===================
+const stop = () => {
+    emit('stop');
+} // end stop
+</script>
+
 <template>
     <button v-on:click="stop">STOP</button>
 </template>
@@ -8,13 +18,3 @@
         min-height: 25px;
     }
 </style>
-
-<script>
-export default {
-    methods: {
-        stop() {
-            this.$emit("stop");
-        } // end stop
-    } // end methods
-} // end export
-</script>

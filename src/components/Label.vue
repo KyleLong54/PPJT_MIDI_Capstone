@@ -6,13 +6,27 @@ defineProps({
 </script>
 
 <template>
-    <p style="color: red;">{{ Title }}</p>
+    <a v-on:click="test()">{{ Title }}</a>
 </template>
 
-<style scoped></style>
+<style scoped>
+a {
+    color: red;
+
+    width: 100%;
+}
+
+a:hover {
+    cursor: pointer;
+}
+</style>
 
 <script>
 export default {
-
+methods: {
+    test() {
+        alert(this.MeasureNum)
+    }
+}
 } // end export
 </script>

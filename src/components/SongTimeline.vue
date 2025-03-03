@@ -3,16 +3,13 @@ import SongMeasure from './SongMeasure.vue';
 
 // I imagine that a list of all the measures will need to be passed here
 defineProps({
-    
+    Labels: Array
 }) // end defineProps
 </script>
 
 <template>
     <div class="measureContainer">
-        <SongMeasure -measure-num="1" -tick-num="0"/>
-        <SongMeasure -measure-num="2" -tick-num="420"/>
-        <SongMeasure -measure-num="3" -tick-num="840"/>
-        <SongMeasure -measure-num="4" -tick-num="1260"/>
+        <SongMeasure v-for="label in Labels" :-measure-num="Labels.indexOf(label)" :-tick-num="label" />
     </div>
 </template>
 

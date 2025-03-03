@@ -7,7 +7,7 @@ defineProps({
 
 <template>
     <div class="outline">
-        <button style="width: 30px; height: 30px;">O</button>
+        <button>O</button>
     </div>
 </template>
 
@@ -23,7 +23,14 @@ defineProps({
 }
 
 button {
+    width: 30px;
+    height: 30px;
     border: solid black 1px;
+}
+
+button:hover {
+    cursor: pointer;
+    background-color: lightgrey;
 }
 </style>
 

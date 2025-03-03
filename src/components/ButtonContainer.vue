@@ -1,14 +1,34 @@
 <script setup>
-    import PlayButton from './PlayButton.vue';
-    import PauseButton from './PauseButton.vue';
-    import StopButton from './StopButton.vue';
+// =================== Libraries ===================
+import { defineEmits } from 'vue';
+
+// =================== Components ===================
+import PlayButton from './PlayButton.vue';
+import PauseButton from './PauseButton.vue';
+import StopButton from './StopButton.vue';
+
+// =================== Setup Emits ===================
+const emit = defineEmits(['play', 'pause', 'stop']);
+
+// =================== Fuctions ===================
+const play = () => {
+    emit('play');
+} // end play
+
+const pause = () => {
+    emit("pause");
+} // end pause
+
+const stop = () => {
+    emit("stop");
+} // end stop
 </script>
 
 <template>
     <div class="container">
-        <PlayButton @play="play"/>
-        <PauseButton @pause="pause"/>
-        <StopButton @stop="stop"/>
+        <PlayButton @play="play" />
+        <PauseButton @pause="pause" />
+        <StopButton @stop="stop" />
     </div>
 </template>
 
@@ -28,21 +48,3 @@
     padding: 1%;
 }
 </style>
-
-<script>
-export default {
-    methods: {
-        play() {
-            this.$emit("play");
-        }, // end play
-
-        pause() {
-            this.$emit("pause");
-        }, // end pause
-
-        stop() {
-            this.$emit("stop");
-        }, // end stop
-    } // end methods
-} // end export
-</script>

@@ -15,7 +15,7 @@ import AddTitle from './AddTitle.vue';
                 <select name="" id=""></select>
             </div>
             <div class="buttonContainer">
-                <button type="submit">Create Label</button>
+                <button v-on:click="test()">Create Label</button>
             </div>
         </div>
     </div>
@@ -69,6 +69,10 @@ select {
 
 <script>
 export default {
-
+    methods: {
+        test() {
+            this.$emit("AddLabel", )
+        }
+    }
 } // end export
 </script>
