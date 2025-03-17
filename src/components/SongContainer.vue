@@ -37,7 +37,7 @@ defineExpose({
     <div class="container">
         <SongTitle :Title="Title" />
         <SongTimeline :-measures="Mesaures" @skip="skip" />
-        <LabelTray ref="labelTray" />
+        <LabelTray ref="labelTray" @skip="skip" />
     </div>
 </template>
 

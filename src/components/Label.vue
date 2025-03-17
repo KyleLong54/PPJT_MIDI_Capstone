@@ -6,7 +6,7 @@ defineProps({
 </script>
 
 <template>
-    <a v-on:click="test()">{{ Title }}</a>
+    <a v-on:click="$emit('skip', MeasureNum)">{{ Title }}</a>
 </template>
 
 <style scoped>
@@ -20,13 +20,3 @@ a:hover {
     cursor: pointer;
 }
 </style>
-
-<script>
-export default {
-methods: {
-    test() {
-        alert(this.MeasureNum)
-    }
-}
-} // end export
-</script>

@@ -24,6 +24,12 @@ const labels = ref([]);
 // Sorting label array to display them descending
 labels.value.sort((a, b) => a.measureNum - b.measureNum);
 
+const emit = defineEmits(['skip']);
+
+const skip = (measureNum) => {
+    emit('skip', measureNum);
+} // end skip
+
 const addLabel = (labelToAdd) => {
     labels.value.push(labelToAdd);
 
@@ -45,7 +51,7 @@ defineExpose({
             <!--Moves the label slightly to line it up more-->
             <div class="smallSpacer"></div>
             <!--Label-->
-            <Label :Title="label.title" :MeasureNum="label.measureNum"></Label>
+            <Label :Title="label.title" :MeasureNum="label.measureNum" @skip="skip"></Label>
             <!--Ensures that the next label is not on the same line-->
             <div class="postSpacer"></div>
         </div>
