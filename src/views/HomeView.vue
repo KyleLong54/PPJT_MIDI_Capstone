@@ -9,9 +9,12 @@ import UploadError from '@/components/UploadError.vue';
   <header>
     <Banner/>
   </header>
+
   <main>
-    <UploadContent @show-error-message="showErrorMessage"/>
-    <UploadError id="upload_error" style="visibility: hidden;"/>
+    <!-- <div class="uploadContainer"> -->
+      <UploadContent @show-error-message="showErrorMessage"/>
+      <UploadError id="upload_error" style="visibility: hidden;"/>
+    <!-- </div> -->
   </main>
 </template>
 
@@ -19,11 +22,27 @@ import UploadError from '@/components/UploadError.vue';
 header {
   line-height: 3;
   width: 100%;
+
+  border-bottom: 2px black solid;
 }
 main {
   height: 100%;
   width: 100%;
   line-height: 5;
+
+  margin-top: 5%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.uploadContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 </style>
 

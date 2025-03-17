@@ -1,24 +1,42 @@
 <script setup>
-// Libraries
+// =================== Libraries ===================
 import { ref } from 'vue';
 
-// Components
+// =================== Components ===================
 import LabelTray from './LabelTray.vue';
 import SongTitle from './SongTitle.vue';
 import SongTimeline from './SongTimeline.vue';
 
+// Get reference to the Label Tray
+const labelTray = ref(null);
 
-
+// Define properties
 defineProps({
     Title: String,
-    Labels: Array
+    Labels: Array,
+    Mesaures: Array
 }) // end defineProps
+
+const emit = defineEmits(['skip']);
+
+const skip = (measureNum) => {
+    emit('skip', measureNum);
+} // end skip
+
+const addLabel = (labelToAdd) => {
+    labelTray.value.addLabel(labelToAdd);
+}
+
+// Allow the method to be accessed by parents
+defineExpose({
+    addLabel
+});
 </script>
 
 <template>
     <div class="container">
         <SongTitle :Title="Title" />
-        <SongTimeline :Labels="Labels" />
+        <SongTimeline :-measures="Mesaures" @skip="skip" />
         <LabelTray ref="labelTray" />
     </div>
 </template>
@@ -34,18 +52,8 @@ defineProps({
     gap: 5px;
 
     height: 100%;
+    width: 100%;
 
     padding: 1%;
 }
 </style>
-
-<script>
-
-export default {
-    methods: {
-        test() {
-            alert('test')
-        }
-    }
-} // end export
-</script>

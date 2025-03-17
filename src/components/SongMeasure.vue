@@ -1,4 +1,5 @@
 <script setup>
+// =================== Define Properties ===================
 defineProps({
     MeasureNum: Number,
     TickNum: Number,
@@ -7,15 +8,16 @@ defineProps({
 
 <template>
     <div class="outline">
-        <button>O</button>
+        <!-- <p style="font-size: 9px;">{{ MeasureNum }}</p> -->
+        <button v-on:click="$emit('skip', MeasureNum)"><img src="../assets/Black Dot.png" alt="Measure Dot"></button>
     </div>
 </template>
 
 <style scoped>
 .outline {
     border: solid black 1px;
-    width: 35px;
-    height: 35px;
+    min-width: 35px;
+    min-height: 35px;
 
     display: flex;
     justify-content: center;
@@ -25,17 +27,29 @@ defineProps({
 button {
     width: 30px;
     height: 30px;
-    border: solid black 1px;
+
+    border: 0px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-button:hover {
+
+img {
+    height: 26px;
+    width: 26px;
+}
+
+img:hover {
     cursor: pointer;
-    background-color: lightgrey;
+}
+
+.outline:hover {
+    background-color: lightgray;
+}
+
+.outline:hover button {
+    background-color: lightgray;
 }
 </style>
-
-<script>
-export default {
-
-} // end export
-</script>

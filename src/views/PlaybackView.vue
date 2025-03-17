@@ -1,20 +1,20 @@
 <script setup>
 // =================== Libraries ===================
-import { useRouter, useRoute } from 'vue-router'
-import { onMounted} from 'vue'
-import * as Tone from "tone"
-import { Midi } from '@tonejs/midi'
+import { useRouter, useRoute } from 'vue-router';
+import { onMounted, ref } from 'vue';
+import * as Tone from "tone";
+import { Midi } from '@tonejs/midi';
 
 // =================== Components ===================
-import TimeContainer from '@/components/TimeContainer.vue'
-import Logo from '@/components/Logo.vue'
-import ButtonContainer from '@/components/ButtonContainer.vue'
-import SongContainer from '@/components/SongContainer.vue'
-import ExitButton from '@/components/ExitButton.vue'
-import AddLabelForm from '@/components/AddLabelForm.vue'
+import TimeContainer from '@/components/TimeContainer.vue';
+import Logo from '@/components/Logo.vue';
+import ButtonContainer from '@/components/ButtonContainer.vue';
+import SongContainer from '@/components/SongContainer.vue';
+import ExitButton from '@/components/ExitButton.vue';
+import AddLabelForm from '@/components/AddLabelForm.vue';
 
 // =================== Models ===================
-import { LabelModel } from '@/models/LabelModel'
+import { LabelModel } from '@/models/LabelModel';
 
 // =================== Functions ===================
 
@@ -25,6 +25,9 @@ let endTick = -1;
 // Get Router and Route
 const router = useRouter();
 const route = useRoute();
+
+// Get reference to the song container for label creation
+const songContainer = ref(null);
 
 onMounted(() => {
   // Get the midi file from the previous page
@@ -57,63 +60,10 @@ const getFile = () => {
 } // end getFile
 
 // Begins the playback at the current time
-const play = () => {
-  // Get the MIDI file from the session storage
-  let midi = getFile();
-
-  // If we found the file
-  if (midi) {
-    const now = Tone.now() + 0.5;
-
-    midi.tracks.forEach((track) => {
-      //create a synth for each track
-      const synth = new Tone.PolySynth(Tone.Synth, {
-        envelope: {
-          attack: 0.02,
-          decay: 0.1,
-          sustain: 0.3,
-          release: 1,
-        },
-      }).toDestination()
-
-      // Add the synth to the array
-      synths.push(synth)
-
-      // Find all of the notes that are after the start point
-      let skipNotes = getNotes(track, startTicks)
-
-      // Schedule each note to be played
-      skipNotes.forEach((note) => {
-        synth.triggerAttackRelease(
-          note.name,
-          note.duration,
-          note.time + now,
-          note.velocity
-        ) // end triggerAttackRelease
-      }) // end foreach
-    }) // end forEach
-  }
-  // Otherwise
-  else {
-    // Remove the synths
-    removeSynths();
-  } // end if
-
-} // end play
-
-const altPlay = async () => {
+const play = async () => {
   await Tone.start();
   Tone.getTransport().start();
-} // end altPlay
-
-// Removes all synths 
-const removeSynths = () => {
-  // Removes each synths from the array
-  while (synths.length) {
-    const synth = synths.shift();
-    synth.disconnect();
-  } // end while
-} // end removeSynths
+} // end play
 
 // Exits the page, returning to home
 const exit = () => {
@@ -124,59 +74,41 @@ const exit = () => {
   router.push("/");
 } // end exit
 
-// Gets all of the notes that are after the given point
-// track -> the track from the MIDI file to find the notes for
-// ticks -> the tick number to find notes at
-// return -> all notes in the track that are at or after the given tick number 
-const getNotes = (track, ticks) => {
-  // Find the starting index of the first note at or after the given tick
-  let index = track.notes.findIndex((note) => {
-    return note.ticks >= ticks;
-  });
-
-  // Get all notes to be played
-  let allNotes = track.notes.slice(index, track.notes.length)
-
-  // For time syncing, subtract the starting time from each note
-  for (let note of allNotes) {
-    note.ticks = note.ticks - ticks;
-  } // end for
-
-  return allNotes;
-} // end getNotes
-
-// Begins the MIDI playback at the beginning of the track
-const start = () => {
-  play();
-} // end start
-
-const skip = () => {
-
-} // end skip
-
 // Pauses the current playback, can be played later
-// NOT FUNCTIONAL NOW
 const pause = () => {
-  startTicks = Tone.Time(Tone.now() + 0.5).toTicks();
-  console.log(startTicks);
-  removeSynths();
-} // end pause
-
-const altPause = () => {
   Tone.getTransport().pause();
-} // end altPause
+} // end pause
 
 // Stops the current playback, can be played later, but will be restarted
 const stop = () => {
-  startTicks = 0;
-  removeSynths();
-}
-
-const altStop = () => {
   Tone.getTransport().stop();
-  Tone.getTransport().dispose();
-  removeSynths();
-} // end altStop
+} // end stop
+
+const skip = (measureNum) => {
+  stop();
+
+  console.log("Starting playback from measure #" + measureNum);
+  Tone.getTransport().start("+0", measureNum + ":0:0");
+  // Tone.getTransport().start(0, Tone.Ticks(4096).toSeconds());
+  // console.log(Tone.Ticks(4096).toBarsBeatsSixteenths())
+  // Tone.getTransport().position = Tone.Ticks(4096).toBarsBeatsSixteenths();
+} // end skip
+
+const altSplit = () => {
+  let furthestTick = -1;
+
+  let midi = getFile();
+
+  midi.tracks.forEach((track) => {
+    let testTick = track.notes[track.notes.length - 1].ticks + track.notes[track.notes.length - 1].durationTicks;
+
+    if (testTick > furthestTick) {
+      furthestTick = testTick;
+    }
+  })
+
+  console.log(Tone.Ticks(furthestTick).toBarsBeatsSixteenths());
+}
 
 const split = () => {
   // Get midi file
@@ -241,10 +173,12 @@ const findEndTick = () => {
     } // end if
   }); // end forEach
 
-  console.log(furthestTick);
   return furthestTick;
 } // end findEndTick
 
+const addLabel = (labelToAdd) => {
+  songContainer.value.addLabel(labelToAdd);
+}
 </script>
 
 <template>
@@ -253,19 +187,19 @@ const findEndTick = () => {
   <main>
     <!--Contains playback and time controls-->
     <div class="row">
-      <ButtonContainer style="height: 100%;" @play="altPlay" @pause="altPause" @stop="altStop" />
+      <ButtonContainer style="height: 100%;" @play="play" @pause="pause" @stop="stop" />
       <TimeContainer style="height: 100%;" />
       <Logo />
     </div>
 
     <!--Contains song measure data-->
     <div class="measuresRow">
-      <SongContainer :Title="route.query.Title" :Labels="split()" />
+      <SongContainer ref="songContainer" :Title="route.query.Title" :Labels="null" :-mesaures="split()" @skip="skip" />
     </div>
 
     <!--Contains the label creation-->
     <div class="labelRow">
-      <AddLabelForm @AddLabel=""></AddLabelForm>
+      <AddLabelForm @AddLabel="addLabel" :-measures="split()"></AddLabelForm>
     </div>
 
     <!--Contains the exit button-->
@@ -273,7 +207,7 @@ const findEndTick = () => {
       <ExitButton :Title="$route.query.Title" @Exit="exit"></ExitButton>
     </div>
 
-    <button v-on:click="split">TEST BUTTON</button>
+    <button v-on:click="addLabel">TEST BUTTON</button>
   </main>
 </template>
 

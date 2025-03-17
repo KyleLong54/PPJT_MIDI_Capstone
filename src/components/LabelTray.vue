@@ -1,31 +1,52 @@
 <script setup>
+// =================== Libraries ===================
+import { ref } from 'vue';
+
+// =================== Components ===================
 import Label from './Label.vue';
+
+// =================== Models ===================
 import { LabelModel } from '@/models/LabelModel';
 
 defineProps({
     Labels: Array,
 }) // end defineProps
 
-
-const labels = [];
+const labels = ref([]);
 
 // Create test labels
-const label1 = new LabelModel("Test1", 1);
-labels.push(label1);
-const label2 = new LabelModel("This is a label", 3);
-labels.push(label2);
-labels.push(new LabelModel("This is the 2nd label", 2))
+// const label1 = new LabelModel("Test1", 1);
+// labels.value.push(label1);
+// const label2 = new LabelModel("This is a label", 3);
+// labels.value.push(label2);
+// labels.value.push(new LabelModel("This is the 2nd label", 2));
 
 // Sorting label array to display them descending
-labels.sort((a, b) => a.measureNum - b.measureNum);
+labels.value.sort((a, b) => a.measureNum - b.measureNum);
+
+const addLabel = (labelToAdd) => {
+    labels.value.push(labelToAdd);
+
+    // Sorting label array to display them descending
+    labels.value.sort((a, b) => a.measureNum - b.measureNum);
+} // end addLabel
+
+defineExpose({
+    addLabel
+});
 </script>
 
 <template>
     <!--This will contain all of the labels that exist-->
     <div class="tray">
         <div class="label" v-for="label in labels">
+            <!--Ensures that all labels are lined up with their measure-->
             <div class="preSpacer" v-for="n in label.measureNum - 1"></div>
+            <!--Moves the label slightly to line it up more-->
+            <div class="smallSpacer"></div>
+            <!--Label-->
             <Label :Title="label.title" :MeasureNum="label.measureNum"></Label>
+            <!--Ensures that the next label is not on the same line-->
             <div class="postSpacer"></div>
         </div>
     </div>
@@ -48,7 +69,11 @@ labels.sort((a, b) => a.measureNum - b.measureNum);
 }
 
 .preSpacer {
-    min-width: 40px;
+    min-width: 36.6px;
+}
+
+.smallSpacer {
+    min-width: 4px;
 }
 
 .postSpacer {
