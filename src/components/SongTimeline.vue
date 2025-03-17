@@ -22,7 +22,6 @@ const skip = (measureNum) => {
 <style scoped>
 .measureContainer {
     border: solid black 1px;
-    width: 100%;
 
     display: flex;
     justify-content: left;

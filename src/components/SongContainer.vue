@@ -44,15 +44,12 @@ defineExpose({
 <style scoped>
 .container {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
 
     gap: 5px;
-
-    height: 100%;
-    width: 100%;
 
     padding: 1%;
 }
