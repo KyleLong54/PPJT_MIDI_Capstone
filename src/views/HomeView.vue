@@ -1,20 +1,24 @@
 <script setup>
+// =================== Libraries ===================
 import { RouterLink, RouterView } from 'vue-router'
+
+// =================== Components ===================
 import Banner from '../components/Banner.vue'
 import UploadContent from '../components/UploadContent.vue';
 import UploadError from '@/components/UploadError.vue';
 </script>
 
 <template>
+  <!-- Banner with title and logo -->
   <header>
-    <Banner/>
+    <Banner />
   </header>
 
   <main>
-    <!-- <div class="uploadContainer"> -->
-      <UploadContent @show-error-message="showErrorMessage"/>
-      <UploadError id="upload_error" style="visibility: hidden;"/>
-    <!-- </div> -->
+    <!-- Upload button -->
+    <UploadContent @show-error-message="showErrorMessage" />
+    <!-- Upload error message (only shown when there is an error with file upload) -->
+    <UploadError id="upload_error" style="visibility: hidden;" />
   </main>
 </template>
 
@@ -25,6 +29,7 @@ header {
 
   border-bottom: 2px black solid;
 }
+
 main {
   height: 100%;
   width: 100%;

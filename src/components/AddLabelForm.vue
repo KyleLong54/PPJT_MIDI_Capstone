@@ -20,8 +20,10 @@ const measureSelect = ref(null);
 // Get reference to the error message
 const labelCreationErrorMessage = ref(null);
 
+// Setup Emits
 const emit = defineEmits(['addLabel'])
 
+// Adds a label to the label tray based on the inputted fields
 const addLabel = () => {
     // Debug message
     console.log('The form wants to add a label. Title: ' + labelTitle.value + ', Measure: ' + measureSelect.value);
@@ -43,7 +45,7 @@ const addLabel = () => {
                 labelCreationErrorMessage.value.hideMessage();
             } else {
                 console.log('Title too long');
-                // If more, just show error message
+                // If more than 25 characters, just show error message
                 labelCreationErrorMessage.value.showMessage();
             } // end if
         } else {
@@ -64,12 +66,15 @@ const addLabel = () => {
 
 <template>
     <div class="container">
+        <!-- Title for the add label form -->
         <AddTitle></AddTitle>
         <div class="form">
+            <!-- Title entry -->
             <div class="addTitle">
                 <p>Title:</p>
                 <input v-model="labelTitle" type="text" name="" id="">
             </div>
+            <!-- Measure selection -->
             <div class="selectMeasure">
                 <p>Measure:</p>
                 <select v-model="measureSelect" name="" id="">
@@ -77,7 +82,9 @@ const addLabel = () => {
                 </select>
             </div>
             <div class="buttonContainer">
+                <!-- Create button -->
                 <button v-on:click="addLabel">Create Label</button>
+                <!-- Error message -->
                 <LabelCreationError ref="labelCreationErrorMessage"></LabelCreationError>
             </div>
         </div>

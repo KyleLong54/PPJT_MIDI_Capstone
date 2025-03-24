@@ -1,6 +1,8 @@
 <template>
+    <!-- Time Signature changing -->
     <div class="container">
         <p>Time Signature</p>
+        <!-- User will enter new desired time signature here -->
         <input type="text" value="4 | 4">
     </div>
 </template>

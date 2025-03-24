@@ -1,10 +1,12 @@
 <script setup>
+// Define properties
 defineProps({
     Title: String
 }) // end defineProps
 </script>
 
 <template>
+    <!-- Exit button, to exit back to homepage -->
     <button v-on:click="exit">Exit {{ Title }}</button>
 </template>
 

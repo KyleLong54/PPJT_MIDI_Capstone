@@ -16,8 +16,6 @@ import AddLabelForm from '@/components/AddLabelForm.vue';
 // =================== Models ===================
 import { LabelModel } from '@/models/LabelModel';
 
-// =================== Functions ===================
-
 const synths = [];
 let startTicks = 0;
 let endTick = -1;
@@ -29,6 +27,8 @@ const route = useRoute();
 // Get reference to the song container for label creation
 const songContainer = ref(null);
 
+// -- Called when view is mounted --
+// Loads song into playable format in memory
 onMounted(() => {
   // Get the midi file from the previous page
   let midi = getFile();
@@ -84,16 +84,15 @@ const stop = () => {
   Tone.getTransport().stop();
 } // end stop
 
+// Skips the playback to the given measure
 const skip = (measureNum) => {
   stop();
 
   console.log("Starting playback from measure #" + measureNum);
   Tone.getTransport().start("+0", measureNum + ":0:0");
-  // Tone.getTransport().start(0, Tone.Ticks(4096).toSeconds());
-  // console.log(Tone.Ticks(4096).toBarsBeatsSixteenths())
-  // Tone.getTransport().position = Tone.Ticks(4096).toBarsBeatsSixteenths();
 } // end skip
 
+// Test method -> unused
 const altSplit = () => {
   let furthestTick = -1;
 
@@ -110,6 +109,7 @@ const altSplit = () => {
   console.log(Tone.Ticks(furthestTick).toBarsBeatsSixteenths());
 }
 
+// Splits uploaded song into measures (for measure displaying)
 const split = () => {
   // Get midi file
   let midi = getFile();
@@ -163,10 +163,12 @@ const split = () => {
   return measures;
 } // end split
 
+// Finds the furthest ending tick of a track in the song 
 const findEndTick = () => {
   let furthestTick = -1;
   let midi = getFile();
 
+  // Finds the furthest ending tick on a track
   midi.tracks.forEach((track) => {
     if (furthestTick < track.endOfTrackTicks) {
       furthestTick = track.endOfTrackTicks;
@@ -176,9 +178,10 @@ const findEndTick = () => {
   return furthestTick;
 } // end findEndTick
 
+// Adds a label to the label tray
 const addLabel = (labelToAdd) => {
   songContainer.value.addLabel(labelToAdd);
-}
+} // end addLabel
 </script>
 
 <template>
@@ -207,6 +210,7 @@ const addLabel = (labelToAdd) => {
       <ExitButton :Title="$route.query.Title" @Exit="exit"></ExitButton>
     </div>
 
+    <!-- Test Button (for testing methods during development) -->
     <button v-on:click="addLabel">TEST BUTTON</button>
   </main>
 </template>

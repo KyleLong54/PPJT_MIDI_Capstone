@@ -8,28 +8,26 @@ import Label from './Label.vue';
 // =================== Models ===================
 import { LabelModel } from '@/models/LabelModel';
 
+// Define properties
 defineProps({
     Labels: Array,
 }) // end defineProps
 
+// Create reference to array for all labels
 const labels = ref([]);
-
-// Create test labels
-// const label1 = new LabelModel("Test1", 1);
-// labels.value.push(label1);
-// const label2 = new LabelModel("This is a label", 3);
-// labels.value.push(label2);
-// labels.value.push(new LabelModel("This is the 2nd label", 2));
 
 // Sorting label array to display them descending
 labels.value.sort((a, b) => a.measureNum - b.measureNum);
 
+// Define Emits
 const emit = defineEmits(['skip']);
 
+// Tells application to skip to a given measure
 const skip = (measureNum) => {
     emit('skip', measureNum);
 } // end skip
 
+// Adds a label
 const addLabel = (labelToAdd) => {
     labels.value.push(labelToAdd);
 
@@ -86,13 +84,3 @@ defineExpose({
     width: 100%;
 }
 </style>
-
-<script>
-export default {
-    methods: {
-        test() {
-            alert("Test");
-        }
-    }
-} // end export
-</script>

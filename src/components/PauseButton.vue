@@ -1,14 +1,15 @@
 <script setup>
-// =================== Setup Emits ===================
+// Setup Emits 
 const emit = defineEmits(['pause']);
 
-// =================== Functions ===================
+// Tells application to pause playback
 const pause = () => {
     emit("pause");
 } // end pause
 </script>
 
 <template>
+    <!-- Button to pause playback -->
     <button v-on:click="pause">PAUSE</button>
 </template>
 

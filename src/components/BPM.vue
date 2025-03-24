@@ -1,6 +1,8 @@
 <template>
+    <!-- BPM changing -->
     <div class="container">
         <p>BPM</p>
+        <!-- User will enter new desired BPM percentage here -->
         <input type="text" value="100%">
     </div>
 </template>

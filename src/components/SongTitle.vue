@@ -1,10 +1,12 @@
 <script setup>
+// Define properties
 defineProps({
     Title: String
 }) // end defineProps
 </script>
 
 <template>
+    <!-- Displays the title of the uploaded song -->
     <div class="aligner">
         <p>{{ Title }}</p>
     </div>

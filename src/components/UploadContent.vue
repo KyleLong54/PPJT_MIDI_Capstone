@@ -11,6 +11,7 @@ const route = useRoute();
 // Song title to be sent to playback page
 let songTitle = "";
 
+// Define Emits
 const emit = defineEmits(['show-error-message'])
 
 // Reference to the file upload
@@ -67,6 +68,7 @@ const readFile = () => {
       } // end if
 } // end readFile
 
+// Function to facilitate file uploading
 const fileUpload = () => {
   uploadInput.value.click();
 } // end fileUpload
@@ -74,7 +76,9 @@ const fileUpload = () => {
 
 <template>
   <form style="width: 100%;" class="container" action="">
+    <!-- Button that causes file upload -->
     <button class="uploadButton" type="button" v-on:click="fileUpload">Upload File</button>
+    <!-- Hidden upload file input (used when the button is clicked) -->
     <input ref="uploadInput" style="visibility: hidden;" id="MIDI" class="uploadButton" @change="readFile" type="file" accept="audio/midi">
   </form>
 </template>

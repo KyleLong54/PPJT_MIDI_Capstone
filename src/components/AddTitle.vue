@@ -2,6 +2,7 @@
 </script>
 
 <template>
+    <!-- Title for the Add Label form -->
     <div class="titleContainer">
         <p class="title">Add a Label:</p>
     </div>

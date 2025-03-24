@@ -17,15 +17,18 @@ defineProps({
     Mesaures: Array
 }) // end defineProps
 
+// Setup Emits
 const emit = defineEmits(['skip']);
 
+// Tells the application to skip to a given measure
 const skip = (measureNum) => {
     emit('skip', measureNum);
 } // end skip
 
+// Adds a label to the label tray
 const addLabel = (labelToAdd) => {
     labelTray.value.addLabel(labelToAdd);
-}
+} // end addLabel
 
 // Allow the method to be accessed by parents
 defineExpose({

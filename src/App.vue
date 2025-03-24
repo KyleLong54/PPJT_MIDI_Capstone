@@ -1,7 +1,5 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
-import Banner from './components/Banner.vue'
-import UploadContent from './components/UploadContent.vue';
 </script>
 
 <template>

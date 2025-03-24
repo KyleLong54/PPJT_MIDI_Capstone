@@ -1,5 +1,5 @@
 <script setup>
-// =================== Define Properties ===================
+// Define Properties
 defineProps({
     MeasureNum: Number,
     TickNum: Number,
@@ -9,7 +9,10 @@ defineProps({
 <template>
     <div class="outline">
         <!-- <p style="font-size: 9px;">{{ MeasureNum }}</p> -->
+
+        <!-- Button with black circle -->
         <button v-on:click="$emit('skip', MeasureNum)"><img src="../assets/Black Dot.png" alt="Measure Dot"></button>
+        <!-- NOTE: The button also tells the application to skip to the associated measure -->
     </div>
 </template>
 

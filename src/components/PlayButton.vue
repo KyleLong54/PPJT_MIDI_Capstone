@@ -1,8 +1,8 @@
 <script setup>
-import { defineEmits } from 'vue';
-
+// Setup Emits
 const emit = defineEmits(['play'])
 
+// Tells application to play playback
 const play = () => {
     emit('play');
 } // end play

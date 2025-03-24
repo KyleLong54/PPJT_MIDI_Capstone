@@ -1,4 +1,5 @@
 <script setup>
+// Define properties
 defineProps({
     Title: String,
     MeasureNum: Number,
@@ -6,6 +7,7 @@ defineProps({
 </script>
 
 <template>
+    <!-- Label in a song, linked to a measure -->
     <a v-on:click="$emit('skip', MeasureNum)">{{ Title }}</a>
 </template>
 

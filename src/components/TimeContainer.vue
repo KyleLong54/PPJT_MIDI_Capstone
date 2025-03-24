@@ -1,9 +1,11 @@
 <script setup>
+// =================== Components ===================
 import BPM from './BPM.vue';
 import TimeSignature from './TimeSignature.vue';
 </script>
 
 <template>
+    <!-- Contains the BPM and time signature components -->
     <div class="container">
         <BPM/>
         <TimeSignature/>

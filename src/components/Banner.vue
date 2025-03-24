@@ -1,4 +1,5 @@
 <template>
+    <!-- Welcome message and PPJT logo -->
     <div class="banner">
         <h1 class="title">Welcome!</h1>
         <img class="logo" src="./images/ppjt_logo.jpg" alt="PPJT Logo">
