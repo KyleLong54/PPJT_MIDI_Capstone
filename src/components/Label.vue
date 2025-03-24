@@ -8,7 +8,7 @@ defineProps({
 
 <template>
     <!-- Label in a song, linked to a measure -->
-    <a v-on:click="$emit('skip', MeasureNum)">{{ Title }}</a>
+    <a v-on:click="$emit('skip', MeasureNum - 1)">{{ Title }}</a>
 </template>
 
 <style scoped>
