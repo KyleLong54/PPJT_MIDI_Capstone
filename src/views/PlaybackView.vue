@@ -211,7 +211,7 @@ const addLabel = (labelToAdd) => {
     </div>
 
     <!-- Test Button (for testing methods during development) -->
-    <button v-on:click="addLabel">TEST BUTTON</button>
+    <!-- <button v-on:click="addLabel">TEST BUTTON</button> -->
   </main>
 </template>
 
