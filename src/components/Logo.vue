@@ -1,6 +1,6 @@
 <template>
     <!-- PPJT logo image -->
-    <img class="logo" src="./images/ppjt_logo.jpg" alt="PPJT Logo">
+    <img class="logo" src="./images/ppjt_logo_full.jpg" alt="PPJT Logo">
 </template>
 
 <style scoped>

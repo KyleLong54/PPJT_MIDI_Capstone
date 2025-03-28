@@ -2,7 +2,7 @@
     <!-- Welcome message and PPJT logo -->
     <div class="banner">
         <h1 class="title">Welcome!</h1>
-        <img class="logo" src="./images/ppjt_logo.jpg" alt="PPJT Logo">
+        <img class="logo" src="./images/ppjt_logo_full.jpg" alt="PPJT Logo">
     </div>
 </template>
 
@@ -30,7 +30,7 @@
 
     .logo {
         max-width: 180px;
-        max-height: 172px;
+        max-height: 144px;
         margin-left: auto;
         padding: 1%;
     }
