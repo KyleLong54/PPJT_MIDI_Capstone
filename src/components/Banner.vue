@@ -32,6 +32,19 @@
         max-width: 180px;
         max-height: 144px;
         margin-left: auto;
-        padding: 1%;
+        margin-right: 2%;
+    }
+
+    /* Colors */
+    .banner {
+        background-color: var(--color-bg);
+    }
+    
+    img {
+        border: 1px solid var(--color-border);
+    }
+
+    h1 {
+        color: var(--color-text-main);
     }
 </style>

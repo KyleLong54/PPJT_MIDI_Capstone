@@ -20,13 +20,19 @@ import TimeSignature from './TimeSignature.vue';
     align-items: center;
     justify-content: center;
 
-    gap: 5px;
+    gap: 25px;
 
     width: 32%;
     height: 100%;
 
     padding: 1%;
+}
 
-    border: solid black 3px;
+/* Colors */
+.container {
+    background-color: var(--color-bg-panel);
+
+    border: 2px solid var(--color-border);
+    border-radius: 10px;
 }
 </style>

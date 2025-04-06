@@ -18,7 +18,6 @@ defineProps({
 
 <style scoped>
 .outline {
-    border: solid black 1px;
     min-width: 35px;
     min-height: 35px;
 
@@ -44,15 +43,31 @@ img {
     width: 26px;
 }
 
+/* Colors */
 img:hover {
     cursor: pointer;
 }
 
+button {
+    background-color: var(--color-bg-panel);
+}
+
+.outline {
+    background-color: var(--color-bg-panel);
+
+    border: 1px solid var(--color-button-border);
+    border-radius: 5px;
+
+    transition: background-color 0.2s ease;
+}
+
 .outline:hover {
-    background-color: lightgray;
+    background-color: var(--color-accent-ppjt-green-light);
+    border: 1px solid transparent;
 }
 
 .outline:hover button {
-    background-color: lightgray;
+    background-color: var(--color-accent-ppjt-green-light);
+    border: 1px solid transparent;
 }
 </style>

@@ -100,6 +100,10 @@ const addLabel = () => {
 .form {
     display: flex;
     flex-direction: column;
+
+    margin-top: 5%;
+    margin-left: 5%;
+    margin-right: 5%;
 }
 
 .addTitle {
@@ -118,6 +122,8 @@ const addLabel = () => {
     align-items: center;
 
     gap: 50px;
+
+    margin-bottom: 3%;
 }
 
 .buttonContainer {
@@ -130,11 +136,18 @@ const addLabel = () => {
 }
 
 button {
-    padding: 0px 0px 0px 0px;
     width: 95%;
 }
 
 select {
     min-width: 100px;
+}
+
+/* Colors */
+.container {
+    background-color: var(--color-bg-panel);
+    border: 2px solid var(--color-border);
+
+    border-radius: 10px;
 }
 </style>

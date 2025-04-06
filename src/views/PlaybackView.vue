@@ -219,12 +219,24 @@ const addLabel = (labelToAdd) => {
 header {
   line-height: 3;
   width: 100%;
+
+  font-family: 'Montserrat', sans-serif;
 }
 
 main {
   height: 100%;
   width: 100%;
   line-height: 1.5;
+
+  font-family: 'Montserrat', sans-serif;
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  src: url('./assets/fonts/Poppins-Regular.ttf') format('ttf');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
 }
 
 .row {
@@ -261,8 +273,8 @@ main {
 
   gap: 20px;
 
-  padding-bottom: 3%;
-  padding-left: .5%;
+  margin-bottom: 1.5%;
+  margin-left: .5%;
 }
 
 .lastRow {
@@ -274,5 +286,15 @@ main {
   width: 100%;
 
   gap: 20px;
+}
+
+/* Colors */
+button {
+  background-color: var(--color-button-bg);
+}
+
+button:hover {
+  cursor: pointer;
+  background-color: var(--color-button-hover);
 }
 </style>

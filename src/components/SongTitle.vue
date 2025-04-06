@@ -15,7 +15,6 @@ defineProps({
 <style scoped>
 p {
     max-width: 80%;
-    border: 1px solid black;
     padding: 0px 6px 0px 6px;
 }
 
@@ -27,6 +26,14 @@ p {
     justify-content: left;
 
     width: 100%;
+}
+
+/* Colors */
+p {
+    border: 1px solid var(--color-border);
+    border-radius: 5px;
+
+    background-color: var(--color-bg-panel);
 }
 </style>
 

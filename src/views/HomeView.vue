@@ -27,7 +27,7 @@ header {
   line-height: 3;
   width: 100%;
 
-  border-bottom: 2px black solid;
+  font-family: 'Montserrat', sans-serif;
 }
 
 main {
@@ -41,6 +41,15 @@ main {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
+  font-family: 'Montserrat', sans-serif;
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  src: url('./assets/fonts/Poppins-Regular.ttf') format('ttf');
+  font-weight: 400;
+  font-style: normal;
 }
 
 .uploadContainer {
@@ -48,6 +57,24 @@ main {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+/* Colors */
+header {
+  border-bottom: 2px solid var(--color-accent-ppjt-green);
+}
+
+button {
+  background-color: var(--color-button-bg);
+}
+
+button:hover {
+  cursor: pointer;
+  background-color: var(--color-button-hover);
+}
+
+img {
+  border: 1px solid var(--color-border);
 }
 </style>
 

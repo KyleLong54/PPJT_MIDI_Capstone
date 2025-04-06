@@ -25,9 +25,22 @@ const skip = (measureNum) => {
 
 <style scoped>
 .measureContainer {
-    border: solid black 1px;
-
     display: flex;
     justify-content: left;
+
+    gap: 1px;
+
+    padding-top: 1px;
+    padding-bottom: 1px;
+    padding-right: 2px;
+    padding-left: 2px;
+}
+
+/* Colors */
+.measureContainer {
+    background-color: var(--color-accent-ppjt-green);
+
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
 }
 </style>

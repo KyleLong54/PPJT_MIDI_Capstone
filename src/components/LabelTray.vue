@@ -15,6 +15,8 @@ defineProps({
 
 // Create reference to array for all labels
 const labels = ref([]);
+// Create reference to label tray (for hiding it)
+const tray = ref(null);
 
 // Sorting label array to display them descending
 labels.value.sort((a, b) => a.measureNum - b.measureNum);
@@ -33,6 +35,9 @@ const addLabel = (labelToAdd) => {
 
     // Sorting label array to display them descending
     labels.value.sort((a, b) => a.measureNum - b.measureNum);
+
+    // Make sure that label tray is showing
+    tray.value.style.border = '2px solid var(--color-border)';
 } // end addLabel
 
 defineExpose({
@@ -42,7 +47,7 @@ defineExpose({
 
 <template>
     <!--This will contain all of the labels that exist-->
-    <div class="tray">
+    <div ref="tray" class="tray">
         <div class="label" v-for="label in labels">
             <!--Ensures that all labels are lined up with their measure-->
             <div class="preSpacer" v-for="n in label.measureNum - 1"></div>
@@ -59,7 +64,6 @@ defineExpose({
 <style scoped>
 .tray {
     width: 100%;
-    border: 1px solid purple;
 
     display: flex;
     flex-direction: column;
@@ -82,5 +86,13 @@ defineExpose({
 
 .postSpacer {
     width: 100%;
+}
+
+/* Colors */
+.tray {
+    background-color: var(--color-bg-panel);
+
+    border: 0px solid var(--color-border);
+    border-radius: 8px;
 }
 </style>

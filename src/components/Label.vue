@@ -13,7 +13,9 @@ defineProps({
 
 <style scoped>
 a {
-    color: red;
+    color: var(--color-accent-ppjt-green);
+
+    padding-left: 3px;
 
     width: 100%;
 }

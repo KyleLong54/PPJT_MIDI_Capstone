@@ -1,35 +1,73 @@
-@import './base.css';
+:root {
+    /* Base Grays */
+    --color-bg: #f9f9f9;
+    --color-bg-panel: #ffffff;
+    --color-text-main: #1e1e1e;
+    --color-text-secondary: #666666;
+    --color-border: #dcdcdc;
 
-#app {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  font-weight: normal;
+    /* Buttons */
+    --color-button-bg: #e0e0e0;
+    --color-button-hover: #cccccc;
+    --color-button-border: #b0b0b0;
+
+    /* Accent Options */
+    --color-accent-blue: #4a90e2;
+    --color-accent-coral: #ff7f50;
+    --color-accent-ppjt-green: #18ab22;
+    --color-accent-ppjt-green-light: color-mix(in srgb, var(--color-accent-ppjt-green) 50%, white);
 }
 
+header {
+    background-color: var(--color-bg);
+}
+
+main {
+    background-color: var(--color-bg);
+}
+
+html,
+body {
+    background-color: var(--color-bg);
+}
+
+@font-face {
+    font-family: 'Montserrat';
+    src: url('./assets/fonts/Poppins-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+}
+
+input,
+button,
+select {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+}
+
+button {
+    background-color: var(--color-button-bg);
+    border: 2px solid var(--color-button-border);
+    border-radius: 8px;
+    transition: background-color 0.2s ease;
+}
+
+button:hover {
+    cursor: pointer;
+    background-color: var(--color-button-hover);
+}
+
+input,
+select {
+    border: 1px solid var(--color-button-border);
+    border-radius: 5px;
+}
+
+h1,
+p,
 a,
-.green {
-  text-decoration: none;
-  color: hsla(160, 100%, 37%, 1);
-  transition: 0.4s;
-  padding: 3px;
-}
-
-@media (hover: hover) {
-  a:hover {
-    background-color: hsla(160, 100%, 37%, 0.2);
-  }
-}
-
-@media (min-width: 1024px) {
-  body {
-    display: flex;
-    place-items: center;
-  }
-
-  #app {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    padding: 0 2rem;
-  }
+button,
+input,
+select {
+    color: var(--color-text-main);
 }

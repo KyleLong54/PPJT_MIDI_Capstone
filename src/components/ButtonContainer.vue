@@ -50,4 +50,12 @@ const stop = () => {
 
     padding: 1%;
 }
+
+/* Colors */
+.container {
+    background-color: var(--color-bg-panel);
+    
+    border: 2px solid var(--color-border);
+    border-radius: 10px;
+}
 </style>

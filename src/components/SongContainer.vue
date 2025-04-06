@@ -52,7 +52,7 @@ defineExpose({
     align-items: center;
     justify-content: center;
 
-    gap: 5px;
+    gap: 2px;
 
     padding: 1%;
 }

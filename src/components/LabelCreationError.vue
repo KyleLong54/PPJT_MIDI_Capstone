@@ -8,11 +8,15 @@ const message = ref(null);
 // Shows the error message
 const showMessage = () => {
     message.value.style.visibility = 'visible';
+    // Make sure it has a height
+    message.value.style.height = 'fit-content';
 }
 
 // Hides the error message
 const hideMessage = () => {
     message.value.style.visibility = 'hidden';
+    // Also make it have no height
+    message.value.style.height = '0px';
 }
 
 defineExpose({
@@ -30,5 +34,6 @@ defineExpose({
 .error {
     color: red;
     visibility: hidden;
+    height: 0px;
 }
 </style>
