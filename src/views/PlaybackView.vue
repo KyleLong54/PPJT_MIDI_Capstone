@@ -27,6 +27,40 @@ const route = useRoute();
 // Get reference to the song container for label creation
 const songContainer = ref(null);
 
+// =================== Connect MIDI Keyboard ===================
+const inputSynthVol = new Tone.Volume(-25).toDestination();
+const inputSynth = new Tone.PolySynth(Tone.Synth).connect(inputSynthVol);
+
+const midiMessage = (message) => {
+
+  if (message.data[0] == 144) {
+    console.log("Note number: ", Tone.Frequency(message.data[1], 'midi').toNote(), " at velocity ", message.data[2]);
+    inputSynth.triggerAttack(Tone.Frequency(message.data[1], 'midi').toNote(), Tone.now(), message.data[2])
+  }
+  else if (message.data[0] == 128) {
+    console.log("NOTE OFF")
+    inputSynth.triggerRelease(Tone.Frequency(message.data[1], 'midi').toNote(), Tone.now())
+  }
+}
+
+const midiAccessGiven = (midiAccess) => {
+  console.log('MIDI access given.');
+
+  // Sets up all midi messages from any midi input to be handled by the method
+  for (const midiInput of midiAccess.inputs.values()) {
+    midiInput.onmidimessage = midiMessage;
+  } // end for
+} // end midiAccessGiven
+
+const midiAccessDenied = () => {
+  console.log('MIDI access denied.');
+} // end midiAccessDenied
+
+// Ask for midi access
+navigator.requestMIDIAccess().then(midiAccessGiven, midiAccessDenied);
+
+// =================== END ===================
+
 // -- Called when view is mounted --
 // Loads song into playable format in memory
 onMounted(() => {
@@ -70,6 +104,9 @@ const exit = () => {
   // Clean up Tone Transport
   Tone.getTransport().dispose();
 
+  // Clean up created synth for input
+  inputSynth.dispose(); 
+
   // Navigate to the home page
   router.push("/");
 } // end exit
@@ -94,19 +131,10 @@ const skip = (measureNum) => {
 
 // Test method -> unused
 const altSplit = () => {
-  let furthestTick = -1;
+  console.log(findEndTick());
+  console.log(Tone.Ticks(findEndTick(), 'number').toBarsBeatsSixteenths());
 
-  let midi = getFile();
-
-  midi.tracks.forEach((track) => {
-    let testTick = track.notes[track.notes.length - 1].ticks + track.notes[track.notes.length - 1].durationTicks;
-
-    if (testTick > furthestTick) {
-      furthestTick = testTick;
-    }
-  })
-
-  console.log(Tone.Ticks(furthestTick).toBarsBeatsSixteenths());
+  console.log("Transport PPQ", Tone.getTransport().PPQ);
 }
 
 // Splits uploaded song into measures (for measure displaying)
@@ -119,7 +147,7 @@ const split = () => {
   // Get the length of each measure
   for (let i = 0; i < midi.header.timeSignatures.length; i++) {
     // Calculate the current measure size
-    let measureSize = ((4 / midi.header.timeSignatures[i].timeSignature[1]) * midi.header.timeSignatures[i].timeSignature[0]) * midi.header.ppq;
+    let measureSize = (4 / (midi.header.timeSignatures[i].timeSignature[1]) * midi.header.timeSignatures[i].timeSignature[0]) * midi.header.ppq;
     // console.log(measureSize);
 
     measureSizes.push(measureSize);
@@ -130,8 +158,11 @@ const split = () => {
   // Furthest tick in the track
   let furthestTick = findEndTick();
 
-  // Variable to store current tick during scan
-  let currentTick = 0;
+  // Earliest tick where music is playing in the track
+  let earliestTick = findBeginningTick();
+
+  // Variable to store current tick during scan -> this should start when the music starts
+  let currentTick = findBeginningTick(); // PUT START TICK HERE
 
   // Measures in song
   let measures = [];
@@ -162,6 +193,21 @@ const split = () => {
 
   return measures;
 } // end split
+
+// Finds the earliest tick in the track where there is music (when the first note starts)
+const findBeginningTick = () => {
+  let earliestTick = Number.MAX_VALUE;
+  let midi = getFile();
+
+  // Finds the earliest starting tick on a track
+  midi.tracks.forEach((track) => {
+    if (track.notes[0].ticks < earliestTick) {
+      earliestTick = track.notes[0].ticks;
+    } // end if
+  }); // end forEach
+
+  return earliestTick;
+}
 
 // Finds the furthest ending tick of a track in the song 
 const findEndTick = () => {

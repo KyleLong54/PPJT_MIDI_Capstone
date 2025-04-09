@@ -77,7 +77,7 @@ defineExpose({
 }
 
 .preSpacer {
-    min-width: 36.6px;
+    min-width: 37.6px;
 }
 
 .smallSpacer {
